@@ -82,12 +82,14 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="hash_table.h" />
     <ClInclude Include="linked_list.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="anagram_solver.c" />
+    <ClCompile Include="hash_table.c" />
     <ClCompile Include="linked_list.c" />
     <ClCompile Include="stdafx.c" />
   </ItemGroup>

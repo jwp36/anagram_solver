@@ -1,18 +1,15 @@
-// anagram_solver.cpp : Defines the entry point for the console application.
-//
+// Fill this in sometime.
 
 #include "stdafx.h"
 
-
-
 #define max_word_len 32
-
 
 // Determines if a word has any unsupported characters.
 // Supported characters exist between decimal 32 and 126 with the exception of the apostrophe, which is decimal 39. 
 // Assumes that each word ends with a newline.
 bool_t has_unsupported_chars(char* word)
 {
+    //TODO: I should actually strip that new line character. 
     int ind = 0;
     unsigned char c = word[ind];
 
@@ -39,7 +36,7 @@ bool_t is_supported(char* word)
 }
 
 // TODO:
-// Update type from void 
+// Update to void pointer.
 void build_hashtable(char* input_file_name)
 {
     FILE* input_file;
@@ -75,7 +72,7 @@ void build_hashtable(char* input_file_name)
 
                 if (error != 0)
                 {
-                    fprintf(stderr, "Can't open input file: %s\n", input_file_name);
+                    fprintf(stderr, "Failed copying a string.: %s\n", word_buffer);
                     return NULL;
                 }
 
@@ -114,11 +111,48 @@ int _tmain(int argc, _TCHAR* argv[])
     char* input_file_name = "../data/words";
     
     
-    build_hashtable(input_file_name);
+    //build_hashtable(input_file_name);
+
+
+    hash_table_t* hash_table = hash_table_create();
+    
+    //26
+    hash_table_insert_word("dog", hash_table);
+    hash_table_insert_word("god", hash_table);
+
+    //56
+    hash_table_insert_word("this", hash_table);
+    hash_table_insert_word("hits", hash_table);
+
+    //24
+    hash_table_insert_word("cat", hash_table);
+    hash_table_insert_word("act", hash_table);
+
+
+    hash_node_t* hash_node = hash_table->table + 24;
+
+    //Printing the linked list
+    linked_list_node_t* curr = hash_node->head;
+    while (curr != NULL)
+    {
+        printf("%s\n", curr->word);
+        curr = curr->next;
+    }
+
+    //free_linked_list(head);
+
+
+
+    //unsigned int x = hash_table_hash("this");
+    //printf("%d\n", x);
+
+
 
     getchar();
     
-
+   
+    
+    
     //prompt user for words and stuff
     return 0;
 }
