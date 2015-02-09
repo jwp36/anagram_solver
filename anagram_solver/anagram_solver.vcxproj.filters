@@ -30,6 +30,9 @@
     <ClInclude Include="hash_table.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="anagram_solver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="anagram_solver.c">
@@ -42,6 +45,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="hash_table.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="program.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

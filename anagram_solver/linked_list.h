@@ -1,5 +1,4 @@
 // Linked list for words.
-// All words should be allocated on the heap.
 
 // TODO: 
 // Consider placing the length of the word in the node as well.

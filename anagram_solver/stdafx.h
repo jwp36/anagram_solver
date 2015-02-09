@@ -24,4 +24,5 @@ typedef int bool_t;
 
 #include "linked_list.h"
 #include "hash_table.h"
+#include "anagram_solver.h"
 
