@@ -11,6 +11,7 @@ linked_list_node_t* create_linked_list_node(char* word)
     else
     {
         linked_list_node->word = word;
+        linked_list_node->len = strlen(word);
         return linked_list_node;
     }
 }

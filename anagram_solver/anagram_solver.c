@@ -3,9 +3,20 @@
 #include "stdafx.h"
 
 #define WORD_BUFFER_SIZE 128
-
 static const int MAX_WORD_LEN = 64;
 static const int MIN_WORD_LEN = 2;
+
+int cmpfunc(const void * a, const void * b)
+{
+    return (*(char*)a - *(char*)b);
+}
+
+//char test[32] = "asdf";
+
+//qsort(test, 4, sizeof(char), cmpfunc);
+
+//printf("%s", test);
+
 
 //Determines if a word has an unsupported characters.
 //Assumes that the word ends with a newline.
@@ -129,22 +140,88 @@ errno_t anagram_solver_create(hash_table_t** hash_table_addr, char* input_file_n
     return 0;
 }
 
-void anagram_solver_solve(hash_table_t* hash_table, char* word)
+//Checks if word is an anagram of sorted_word. 
+bool_t is_anagrams(char* sorted_control_word, char* word)
 {
-    unsigned hash = hash_table_hash(word);
+    int word_len = strlen(word);
+    qsort(word, word_len, sizeof(char), cmpfunc);
+
+    return strcmp(sorted_control_word, word) == 0;
+}
+
+void anagram_solver_solve(hash_table_t* hash_table, char* control_word)
+{
+    unsigned hash = hash_table_hash(control_word);
 
     if (hash <= hash_table->size)
     {
         hash_node_t* hash_node = hash_table->table + hash;
 
-        //now print everything at that node..
+
+        //char x[] = "cat";
+        //char y[] = "Cat";
+
+        //unsigned xh = hash_table_hash(x);
+        //unsigned yh = hash_table_hash(y);
+
+        ////untf("%s: %d\n%s:%d", x, xh, y, yh);
+
+
+        //Make a copy of the argument
+        int control_word_len = strlen(control_word);
+        char* sorted_control_word = strdup(control_word);
+        
+        //set to lowercase..
+        for (int i = 0; i < control_word_len + 1; i++)
+        {
+            sorted_control_word[i] = tolower(sorted_control_word[i]);
+        }
+
+        qsort(sorted_control_word, control_word_len, sizeof(char), cmpfunc);
+
+        
+
+        //printf("Control word is %s\n", control_word);
+        //printf("Sorted control word is %s\n", sorted_control_word);
+
+        
         linked_list_node_t* curr = hash_node->head;
         while (curr != NULL)
         {
-            printf("%s\n", curr->word);
-            curr = curr->next;
+            //make a copy of the linked list word so we can keep the original after it gets sorted...
+            char* ll_word = strdup(curr->word);
+
+
+            //printf("Control word is %s\n", ll_word);
+
+            for (int i = 0; i < curr->len + 1; i++)
+            {
+                ll_word[i] = tolower(ll_word[i]);
+            }
+            
+            //printf("Sorted control word is %s\n", ll_word);
+
+
+
+            //if ((curr->len == strlen(control_word)) & (is_anagrams(sorted_control_word, ll_word)))
+            //{
+            //    printf("%s\n", curr->word);
+            //}
+
+            if (curr->len != control_word_len)
+                goto next;
+
+            if (is_anagrams(sorted_control_word, ll_word))
+            {
+                printf("%s\n", curr->word);
+            }
+
+            next:
+                curr = curr->next;
+                free(ll_word);
         }
 
+        free(sorted_control_word);
     }
     else
     {

@@ -1,19 +1,16 @@
 // Linked list for words.
 
-// TODO: 
-// Consider placing the length of the word in the node as well.
-
-
 struct linked_list_node_s
 {
     char* word;
+    int len;
     struct linked_list_node_s* next;
 };
 
 typedef struct linked_list_node_s linked_list_node_t;
 
 // Creates a linked list node.
-// The node's word is set to the argument of the function.
+// The node's word is set to the argument to the function.
 linked_list_node_t* create_linked_list_node(char* word);
 
 // Appends a word to a linked list. 
