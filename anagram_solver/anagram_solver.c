@@ -164,6 +164,8 @@ void anagram_solver_solve(hash_table_t* hash_table, char* control_word)
                 printf("\t%s\n", curr->word);
             }
 
+            free(ll_word);
+
             next:
                 curr = curr->next;
         }
